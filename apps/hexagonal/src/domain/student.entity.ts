@@ -17,7 +17,7 @@ export class Student {
     code: string;
     name: string;
     email: string;
-    status: string;
+    status?: string;
   }): Student {
     return new Student(
       p.id,
