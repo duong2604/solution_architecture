@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 // Input của use case — do TẦNG APPLICATION tự định nghĩa (KHÔNG dùng DTO của presentation)
 export interface CreateStudentInput {
-  code: string;
   name: string;
   email: string;
 }
@@ -20,13 +19,12 @@ export class StudentsService {
   ) {}
 
   async create(input: CreateStudentInput): Promise<Student> {
-    if (await this.students.findByCode(input.code))
-      throw new ConflictException(`Mã ${input.code} đã tồn tại`);
     if (await this.students.findByEmail(input.email))
       throw new ConflictException(`Email ${input.email} đã được dùng`);
 
     const student = Student.create({
       id: `HS${uuidv4().slice(0, 7)}`,
+      code: `HS${uuidv4().slice(0, 7).toUpperCase()}`,
       ...input,
     });
     await this.students.save(student);

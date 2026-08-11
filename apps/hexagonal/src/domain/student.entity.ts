@@ -1,12 +1,11 @@
 import { Email } from './value-objects/email.vo';
-import { StudentCode } from './value-objects/student-code.vo';
 
 export type StudentStatus = 'ACTIVE' | 'GRADUATED';
 
 export class Student {
   constructor(
     private readonly _id: string,
-    private readonly _code: StudentCode,
+    private readonly _code: string,
     private _name: string,
     private _email: Email,
     private _status: StudentStatus,
@@ -19,20 +18,14 @@ export class Student {
     email: string;
     status?: string;
   }): Student {
-    return new Student(
-      p.id,
-      StudentCode.create(p.code),
-      p.name,
-      Email.create(p.email),
-      'ACTIVE',
-    );
+    return new Student(p.id, p.code, p.name, Email.create(p.email), 'ACTIVE');
   }
 
   get id(): string {
     return this._id;
   }
 
-  get code(): StudentCode {
+  get code(): string {
     return this._code;
   }
 

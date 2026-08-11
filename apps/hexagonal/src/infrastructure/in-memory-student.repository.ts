@@ -5,7 +5,7 @@ import { StudentRepository } from '../domain/student.repository';
 
 @Injectable()
 export class InMemoryStudentRepository implements StudentRepository {
-  private readonly store = new Map<string, Student>(); // hôm nay Map, mai Postgres
+  private readonly store = new Map<string, Student>();
 
   async save(s: Student): Promise<void> {
     await Promise.resolve().then(() => setTimeout(() => {}, 0));
@@ -15,7 +15,7 @@ export class InMemoryStudentRepository implements StudentRepository {
   async findByCode(code: string): Promise<Student | null> {
     await Promise.resolve().then(() => setTimeout(() => {}, 0));
     const c = code.trim().toUpperCase();
-    return [...this.store.values()].find((s) => s.code.value === c) ?? null;
+    return [...this.store.values()].find((s) => s.code === c) ?? null;
   }
   async findByEmail(email: string): Promise<Student | null> {
     await Promise.resolve().then(() => setTimeout(() => {}, 0));

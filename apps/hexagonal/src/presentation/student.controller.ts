@@ -10,7 +10,6 @@ export class StudentsController {
   @Post()
   async create(@Body() dto: CreateStudentDto) {
     const s = await this.studentsService.create({
-      code: dto.code,
       name: dto.name,
       email: dto.email,
     });
@@ -18,7 +17,7 @@ export class StudentsController {
       id: s.id,
       code: s.code,
       name: s.name,
-      email: s.email,
+      email: s.email.value,
       status: s.status,
     };
   }
