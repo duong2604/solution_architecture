@@ -1,5 +1,5 @@
 // presentation/students.controller.ts
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { StudentsService } from '../application/students.service';
 
@@ -20,5 +20,10 @@ export class StudentsController {
       email: s.email.value,
       status: s.status,
     };
+  }
+
+  @Get()
+  findAll() {
+    return this.studentsService.findAll();
   }
 }

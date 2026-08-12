@@ -22,4 +22,9 @@ export class InMemoryStudentRepository implements StudentRepository {
     const e = email.trim().toLowerCase();
     return [...this.store.values()].find((s) => s.email.value === e) ?? null;
   }
+
+  async findAll(): Promise<Student[]> {
+    await Promise.resolve().then(() => setTimeout(() => {}, 0));
+    return [...this.store.values()];
+  }
 }

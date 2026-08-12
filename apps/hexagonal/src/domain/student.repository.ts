@@ -4,6 +4,7 @@ export interface StudentRepository {
   save(student: Student): Promise<void>;
   findByCode(code: string): Promise<Student | null>;
   findByEmail(email: string): Promise<Student | null>;
+  findAll(): Promise<Student[]>;
 }
 
 export const STUDENT_REPOSITORY = 'StudentRepository';

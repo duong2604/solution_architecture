@@ -4,6 +4,10 @@ import { Student } from '../domain/student.entity';
 import type { StudentRepository } from '../domain/student.repository';
 import { STUDENT_REPOSITORY } from '../domain/student.repository';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  StudentResponse,
+  toStudentResponse,
+} from '../presentation/response/students.response';
 
 // Input của use case — do TẦNG APPLICATION tự định nghĩa (KHÔNG dùng DTO của presentation)
 export interface CreateStudentInput {
@@ -29,5 +33,9 @@ export class StudentsService {
     });
     await this.students.save(student);
     return student;
+  }
+
+  async findAll(): Promise<StudentResponse[]> {
+    return (await this.students.findAll()).map(toStudentResponse);
   }
 }
